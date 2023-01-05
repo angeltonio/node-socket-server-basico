@@ -1,24 +1,10 @@
 {
     "version": 2,
-    "name": "websocket-server",
+    "name": "music-album",
     "builds": [
-        {
-            "src": "app.js",
-            "use": "@vercel/node"
-        }
+      { "src": "app.js", "use": "@vercel/node" }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/app.js"
-        },
-        {
-            "src": "/sockets/controller.js",
-            "dest": "/sockets/controller.js"
-        },
-        {
-            "src": "/public/(.*)",
-            "dest": "/public/static/$1"
-        }
+      { "src": "/(.*)", "dest": "/app.js" }
     ]
-}
+  }
