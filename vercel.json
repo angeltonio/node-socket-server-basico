@@ -3,22 +3,15 @@
   "name": "socket",
   "builds": [
     {
-      "src": "app.js",
+      "src": "src/app.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/src/(.*)",
       "dest": "/app.js"
-    },
-    {
-      "src": "/models/server.js",
-      "dest": "/models/server.js"
-    },
-    {
-      "src": "/sockets/controller.js",
-      "dest": "/sockets/controller.js"
     }
+
   ]
 }
