@@ -1,26 +1,26 @@
-// require('dotenv').config();
+require('dotenv').config();
 
-// const Server = require('./models/server');
-
-
-// const server = new Server();
+const Server = require('./models/server');
 
 
+const server = new Server();
 
-// server.listen();
 
 
-const express = require('express');
-const app = express();
-const path = require('path');
+server.listen();
 
-app.use(express.static('public'))
 
-app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: path.join(__dirname, 'public')});
-})
+// const express = require('express');
+// const app = express();
+// const path = require('path');
 
-app.listen(process.env.PORT || 3000);
+// app.use(express.static('public'))
 
-module.exports = app;
+// app.get('/', (req, res) => {
+//     res.sendFile('index.html', {root: path.join(__dirname, 'public')});
+// })
+
+// app.listen(process.env.PORT || 3000);
+
+// module.exports = app;
 
