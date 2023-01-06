@@ -16,7 +16,9 @@ var express = require('express');
 var app = express();
 var expressWs = require('express-ws')(app);
 const path = require('path');
+const cors = require('cors');
 
+app.use( cors() );
 app.use(express.static('public'))
 
 app.use(function (req, res, next) {
