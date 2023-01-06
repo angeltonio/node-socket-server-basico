@@ -66,52 +66,25 @@
 //----------------------------------------------------
 
 
-// const express = require('express')
-// const enableWs = require('express-ws')
+const express = require('express')
+const enableWs = require('express-ws')
 
-// const app = express()
-// enableWs(app)
-
-// app.ws('/echo', (ws, req) => {
-//     ws.on('message', msg => {
-//         ws.send(msg)
-//     })
-
-//     // ws.on('close', () => {
-//     //     console.log('WebSocket was closed')
-//     // })
-// })
-
-// const port = process.env.PORT || 3000;
-
-// app.listen(process.env.PORT || 3000, () => {
-//     console.log('Servidor corriendo en puerto', port);
-// });
-
-
-const https     = require('https')
-const fs        = require('fs')
-const express   = require('express')
-const expressWs = require('express-ws')
-
-const serverOptions = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-}
-
-const app       = express()
-const server    = https.createServer(serverOptions, app)
-
-expressWs(app, server)
+const app = express()
+enableWs(app)
 
 app.ws('/echo', (ws, req) => {
     ws.on('message', msg => {
-        ws.send(msg)
+        // ws.send(msg);
+        console.log(msg);
     })
 
-    ws.on('close', () => {
-        console.log('WebSocket was closed')
-    })
+    // ws.on('close', () => {
+    //     console.log('WebSocket was closed')
+    // })
 })
 
-server.listen(443)
+const port = process.env.PORT || 3000;
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Servidor corriendo en puerto', port);
+});
