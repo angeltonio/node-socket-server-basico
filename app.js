@@ -38,7 +38,11 @@ app.ws('/msg', function (ws, req) {
     console.log('socket', req.testing);
 });
 
-app.listen(3000);
+const port = process.env.PORT || 3000;
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Servidor corriendo en puerto', port);
+});
 
 
 // const express = require('express');
