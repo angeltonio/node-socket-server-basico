@@ -15,6 +15,9 @@
 var express = require('express');
 var app = express();
 var expressWs = require('express-ws')(app);
+const path = require('path');
+
+app.use(express.static('public'))
 
 app.use(function (req, res, next) {
     console.log('middleware');
@@ -24,6 +27,7 @@ app.use(function (req, res, next) {
 
 app.get('/', function (req, res, next) {
     console.log('get route', req.testing);
+    res.sendFile('index.html', { root: path.join(__dirname, 'public') });
     res.end();
 });
 
