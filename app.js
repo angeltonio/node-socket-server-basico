@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 app.get('/', function (req, res, next) {
     console.log('get route', req.testing);
     res.sendFile('index.html', { root: path.join(__dirname, 'public') });
-    res.end();
+    // res.end();
 });
 
 app.ws('/msg', function (ws, req) {
