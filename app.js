@@ -1,33 +1,30 @@
-var express = require('express');
-var app = express();
-var expressWs = require('express-ws')(app);
-const path = require('path');
-const cors = require('cors');
+'use strict';
 
-app.use( cors() );
-app.use(express.static('public'))
+const express = require('express');
+const { Server } = require('ws');
 
-app.use(function (req, res, next) {
-    console.log('middleware');
-    req.testing = 'testing';
-    return next();
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
+
+const server = express()
+    .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const wss = new Server({ server });
+
+wss.on('connection', (ws) => {
+    console.log('Client connected');
+    ws.on('close', () => console.log('Client disconnected'));
+    ws.on('message', (msg) => {
+        console.log(msg.BYTES_PER_ELEMENTS);
+    })
 });
 
-app.get('/', function (req, res, next) {
-    console.log('get route', req.testing);
-    res.sendFile('index.html', { root: path.join(__dirname, 'public') });
-    res.end();
-});
 
-app.ws('/', function (ws, req) {
-    ws.on('message', function (msg) {
-        console.log(msg);
+
+
+setInterval(() => {
+    wss.clients.forEach((client) => {
+        client.send(new Date().toTimeString());
     });
-    console.log('socket', req.testing);
-});
-
-const port = process.env.PORT || 3000;
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Servidor corriendo en puerto', port);
-});
+}, 1000);
