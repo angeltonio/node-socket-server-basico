@@ -66,25 +66,54 @@
 //----------------------------------------------------
 
 
-const express = require('express')
-const enableWs = require('express-ws')
+// const express = require('express')
+// const enableWs = require('express-ws')
 
-const app = express()
-enableWs(app)
+// const app = express()
+// enableWs(app)
 
-app.ws('/echo', (ws, req) => {
-    ws.on('message', msg => {
-        // ws.send(msg);
-        console.log(msg);
-    })
+// app.ws('/echo', (ws, req) => {
+//     ws.on('message', msg => {
+//         // ws.send(msg);
+//         console.log(msg);
+//     })
 
-    // ws.on('close', () => {
-    //     console.log('WebSocket was closed')
-    // })
-})
+//     // ws.on('close', () => {
+//     //     console.log('WebSocket was closed')
+//     // })
+// })
 
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Servidor corriendo en puerto', port);
+// app.listen(process.env.PORT || 3000, () => {
+//     console.log('Servidor corriendo en puerto', port);
+// });
+
+
+
+//---------------------------------------------
+
+'use strict';
+
+const express = require('express');
+const { Server } = require('ws');
+
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
+
+const server = express()
+    .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const wss = new Server({ server });
+
+wss.on('connection', (ws) => {
+    console.log('Client connected');
+    ws.on('close', () => console.log('Client disconnected'));
 });
+
+setInterval(() => {
+    wss.clients.forEach((client) => {
+        client.send(new Date().toTimeString());
+    });
+}, 1000);
