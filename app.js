@@ -1,15 +1,33 @@
-require('dotenv').config();
+var express = require('express');
+var app = express();
+var expressWs = require('express-ws')(app);
+const path = require('path');
+const cors = require('cors');
 
-const Server = require('./src/models/server');
+app.use( cors() );
+app.use(express.static('public'))
 
+app.use(function (req, res, next) {
+    console.log('middleware');
+    req.testing = 'testing';
+    return next();
+});
 
-const server = new Server();
+app.get('/', function (req, res, next) {
+    console.log('get route', req.testing);
+    res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+    res.end();
+});
 
+app.ws('/', function (ws, req) {
+    ws.on('message', function (msg) {
+        console.log(msg);
+    });
+    console.log('socket', req.testing);
+});
 
-server.listen();
+const port = process.env.PORT || 3000;
 
-
-
-
-
-
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Servidor corriendo en puerto', port);
+});
