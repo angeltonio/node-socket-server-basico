@@ -71,8 +71,10 @@
 
   <hr>
   <script>
+    // let HOST = location.origin.replace(/^http/, 'ws')
+    // let ws = new WebSocket(HOST);
     let HOST = location.origin.replace(/^http/, 'ws')
-    let ws = new WebSocket(HOST);
+    let ws = new WebSocket("ws://3.86.18.35/:3000");
     let el;
   </script>
 
