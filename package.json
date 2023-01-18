@@ -18,5 +18,8 @@
     "https": "^1.0.0",
     "socket.io": "^3.1.1",
     "ws": "^8.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

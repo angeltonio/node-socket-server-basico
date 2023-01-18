@@ -1,17 +1,136 @@
 <html>
-  <head>
-    <script>
-      let HOST = location.origin.replace(/^http/, 'ws')
-      let ws = new WebSocket(HOST);
-      let el;
 
-      ws.onmessage = (event) => {
-        el = document.getElementById('server-time');
-        el.innerHTML = 'Server time: ' + event.data;
-      };
-    </script>
-  </head>
-  <body>
-    <p id="server-time"></p>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket Client</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+  <!-- <script>
+    let HOST = location.origin.replace(/^http/, 'ws')
+    let ws = new WebSocket(HOST);
+    let el;
+
+    ws.onmessage = (event) => {
+      el = document.getElementById('server-time');
+      el.innerHTML = 'Server time: ' + event.data;
+    };
+
+
+  </script> -->
+
+</head>
+
+
+<body class="container">
+  <h1 class="mt-2">Socket Client</h1>
+  <hr>
+  <div class="container">
+
+    <div class="col">
+      <button id="btnOnOff" class="btn bg-danger text-white mx-2">
+        On-off
+      </button>
+    </div>
+
+    <br />
+
+    <div class="col">
+      <button id="btnPower" class="btn btn-primary mx-2">
+        Power
+      </button>
+
+      <button id="btnTemp" class="btn btn-warning mx-2">
+        Temp
+      </button>
+
+      <button id="btnTimer" class="btn btn-success mx-2">
+        Timer
+      </button>
+    </div>
+
+    <br />
+
+    <div class="col">
+      <button id="btnMenos" class="btn btn-warning mx-2 rounded-circle">
+        -
+      </button>
+      <button id="btnMas" class="btn btn-primary mx-2 rounded-circle">
+        +
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+
+
+  <hr>
+  <script>
+    let HOST = location.origin.replace(/^http/, 'ws')
+    let ws = new WebSocket(HOST);
+    let el;
+  </script>
+
+  <script>
+    ws.onmessage = (event) => {
+      console.log(event.data);
+      el = document.getElementById('server-time');
+      el.innerHTML = 'Boton pulsado: ' + event.data;
+    };
+  </script>
+
+  <script>
+    const btnOnOff = document.querySelector('#btnOnOff');
+    btnOnOff.addEventListener('click', () => {
+      ws.send("btnOnOff");
+    });
+  </script>
+
+  <script>
+    const btnPower = document.querySelector('#btnPower');
+    btnPower.addEventListener('click', () => {
+      ws.send("btnPower");
+    });
+  </script>
+
+  <script>
+    const btnTemp = document.querySelector('#btnTemp');
+    btnTemp.addEventListener('click', () => {
+      ws.send("btnTemp");
+    });
+  </script>
+
+  <script>
+    const btnTimer = document.querySelector('#btnTimer');
+    btnTimer.addEventListener('click', () => {
+      ws.send("btnTimer");
+    });
+  </script>
+
+  <script>
+    const btnMas = document.querySelector('#btnMas');
+    btnMas.addEventListener('click', () => {
+      ws.send("btnMas");
+    });
+  </script>
+
+  <script>
+    const btnMenos = document.querySelector('#btnMenos');
+    btnMenos.addEventListener('click', () => {
+      ws.send("btnMenos");
+    });
+  </script>
+
+
+  <p id="server-time"></p>
+
+
+
+</body>
+
 </html>
