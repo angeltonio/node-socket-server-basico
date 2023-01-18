@@ -28,4 +28,4 @@ jobs:
           PORT: 22
           KEY: ${{secrets.SSH_KEY}}
           script: |
-             ls
+             sudo pm2 restart all
