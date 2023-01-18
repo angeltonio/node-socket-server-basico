@@ -20,12 +20,6 @@ jobs:
       with:
         source: "."
         target: "~/node-socket-server-basico"
-    - name: Deploy
-      uses: appleboy/ssh-action@master
-      with:
-          HOST: ${{secrets.SSH_HOST}}
-          USERNAME: ${{secrets.SSH_USER}}
-          PORT: 22
-          KEY: ${{secrets.SSH_KEY}}
-          script: |
-             ls
+        script: |
+             sudo pm2 restart all
+   
