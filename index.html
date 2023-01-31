@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Socket Client</title>
+  <title>Cocina de induccion</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
@@ -72,9 +72,10 @@
   <hr>
   <script>
     // let HOST = location.origin.replace(/^http/, 'ws')
-    // let ws = new WebSocket(HOST);
-    // let HOST = location.origin.replace(/^http/, 'ws')
-    let ws = new WebSocket("ws://3.86.18.35/:3000");
+
+    let HOST = location.origin.replace(/^http/, 'ws')
+    let ws = new WebSocket(HOST);
+    // let ws = new WebSocket("ws://3.86.18.35/:3000");
     let el;
   </script>
 
